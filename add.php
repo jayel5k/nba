@@ -49,6 +49,7 @@
 <head>
     <meta charset="utf-8">
     <link   href="css/bootstrap.min.css" rel="stylesheet">
+    <link   href="css/style.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
  //<![CDATA[ 
@@ -101,22 +102,14 @@
 		    			<h3>Add game results</h3>
 		    		</div>
     		
-	    			<form class="form-horizontal" action="create.php" method="post">
+	    			<form class="form-horizontal1" action="create.php" method="post">
+					  
 					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
 					    <label class="control-label">Team</label>
 					    <div class="controls">
-					      	<input name="team" type="text"  placeholder="Name" value="<?php echo !empty($team)?$team:'';?>">
-					      	<?php if (!empty($teamError)): ?>
-					      		<span class="help-inline"><?php echo $teamError;?></span>
-					      	<?php endif; ?>
-					    </div>
-					  </div>
-					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
-					    <label class="control-label">Conference</label>
-					    <div class="controls">
 					      	  <select name="conference" id="conference" onchange="ChangeDivisions(this);">
-					      	  <option value="empty">Select a Conference</option>
-  								<option value="Eastern Conference">Eastern Conference</option>
+					      	  <option value="empty">Select a Team</option>
+  								<option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
   								<option value="Western Conference">Western Conference</option>
 								</select>
 					      	 <value="<?php echo !empty($conference)?$conference:'';?>">
@@ -125,16 +118,42 @@
 					      	<?php endif;?>
 					    </div>
 					  </div>
-					  <div class="control-group <?php echo !empty($divisionError)?'error':'';?>">
-					    <label class="control-label">Division</label>
+					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
+					    <label class="control-label">Score</label>
 					    <div class="controls">
-					      	<select name="division" id="division">
-  							<option value="0">Select a Division</option>
+					      	<input name="team" type="text"  placeholder="Name" value="<?php echo !empty($team)?$team:'';?>">
+					      	<?php if (!empty($teamError)): ?>
+					      		<span class="help-inline"><?php echo $teamError;?></span>
+					      	<?php endif; ?>
+					    </div>
+					  </div>
+					  <div class="form-actions">
+						  <button type="submit" class="btn btn-success">Create</button>
+						  <a class="btn" href="index.php">Back</a>
+						</div>
+					</form>
+					<form class="form-horizontal2" action="create.php" method="post">
+					 
+					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
+					    <label class="control-label">Conference</label>
+					    <div class="controls">
+					      	  <select name="conference" id="conference" onchange="ChangeDivisions(this);">
+					      	  <option value="empty">Select a Team</option>
+  								<option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
 								</select>
-							<value="<?php echo !empty($division)?$division:'';?>">
-					      	<?php if (!empty($divisionError)): ?>
-					      		<span class="help-inline"><?php echo $divisionError;?></span>
+					      	 <value="<?php echo !empty($conference)?$conference:'';?>">
+					      	<?php if (!empty($conferenceError)): ?>
+					      		<span class="help-inline"><?php echo $conferenceError;?></span>
 					      	<?php endif;?>
+					    </div>
+					  </div>
+					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
+					    <label class="control-label">Score</label>
+					    <div class="controls">
+					      	<input name="team" type="text"  placeholder="Name" value="<?php echo !empty($team)?$team:'';?>">
+					      	<?php if (!empty($teamError)): ?>
+					      		<span class="help-inline"><?php echo $teamError;?></span>
+					      	<?php endif; ?>
 					    </div>
 					  </div>
 					  <div class="form-actions">
