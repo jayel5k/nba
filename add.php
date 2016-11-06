@@ -4,41 +4,49 @@
 
 	if ( !empty($_POST)) {
 		// keep track validation errors
-		$teamError = null;
-		$conferenceError = null;
-		$divisionError = null;
+		$team1Error = null;
+		$score1Error = null;
+		$team2Error = null;
+		$score2Error = null;
 		
 		// keep track post values
-		$team = $_POST['team'];
-		$conference = $_POST['conference'];
-		$division = $_POST['division'];
+		$team1 = $_POST['team1'];
+		$score1 = $_POST['score1'];
+		$team2 = $_POST['team2'];
+		$score2 = $_POST['score2'];
+		
 		
 		// validate input
 		$valid = true;
-		if (empty($team)) {
-			$teamError = 'Please enter Name';
+		if (empty($team1)) {
+			$team1Error = 'Please enter game';
 			$valid = false;
 		}
 		
-		if (empty($conference)) {
-			$conferenceError = 'Please enter Email Address';
+		if (empty($score1)) {
+			$score1Error = 'Please enter score';
+			$valid = false;
+		} 
+		if (empty($team2)) {
+			$team2Error = 'Please enter game';
+			$valid = false;
+		}
+		
+		if (empty($score2)) {
+			$score2Error = 'Please enter score';
 			$valid = false;
 		} 
 		
-		if (empty($division)) {
-			$divisionError = 'Please enter Mobile Number';
-			$valid = false;
-		}
 		
 		// insert data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO teams (team,conference,division) values(?, ?, ?)";
+			$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($team,$conference,$division));
+			$q->execute(array($team1,$score1,$team2,$score2));
 			Database::disconnect();
-			header("Location: index.php");
+			header("Location: add.php");
 		}
 	}
 ?>
@@ -102,15 +110,15 @@
 		    			<h3>Add game results</h3>
 		    		</div>
     		
-	    			<form class="form-horizontal1" action="create.php" method="post">
+	    			<form class="form-horizontal1" action="add.php" method="post">
 					  
 					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
 					    <label class="control-label">Team</label>
 					    <div class="controls">
-					      	  <select name="conference" id="conference" onchange="ChangeDivisions(this);">
+					      	  <select name="team1" id="team1" onchange="ChangeDivisions(this);">
 					      	  <option value="empty">Select a Team</option>
-  								<option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
-  								<option value="Western Conference">Western Conference</option>
+  								<option value="Cleveland Cavaliers">Cleveland Cavaliers</option>
+  								<option value="Golden State Warriors">Golden State Warriors</option>
 								</select>
 					      	 <value="<?php echo !empty($conference)?$conference:'';?>">
 					      	<?php if (!empty($conferenceError)): ?>
@@ -121,23 +129,23 @@
 					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
 					    <label class="control-label">Score</label>
 					    <div class="controls">
-					      	<input name="team" type="text"  placeholder="Name" value="<?php echo !empty($team)?$team:'';?>">
+					      	<input name="score1" type="text"  placeholder="Score" value="<?php echo !empty($team)?$team:'';?>">
 					      	<?php if (!empty($teamError)): ?>
 					      		<span class="help-inline"><?php echo $teamError;?></span>
 					      	<?php endif; ?>
 					    </div>
 					  </div>
-					  <div class="form-actions">
-						  <button type="submit" class="btn btn-success">Create</button>
+					 <!-- <div class="form-actions">
+						  <button type="submit" class="btn btn-success">Save</button>
 						  <a class="btn" href="index.php">Back</a>
 						</div>
 					</form>
-					<form class="form-horizontal2" action="create.php" method="post">
+					<form class="form-horizontal2" action="add.php" method="post">-->
 					 
 					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
-					    <label class="control-label">Conference</label>
+					    <label class="control-label">Team</label>
 					    <div class="controls">
-					      	  <select name="conference" id="conference" onchange="ChangeDivisions(this);">
+					      	  <select name="team2" id="game2" onchange="ChangeDivisions(this);">
 					      	  <option value="empty">Select a Team</option>
   								<option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
 								</select>
@@ -150,19 +158,74 @@
 					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
 					    <label class="control-label">Score</label>
 					    <div class="controls">
-					      	<input name="team" type="text"  placeholder="Name" value="<?php echo !empty($team)?$team:'';?>">
+					      	<input name="score2" type="text"  placeholder="Name" value="<?php echo !empty($team)?$team:'';?>">
 					      	<?php if (!empty($teamError)): ?>
 					      		<span class="help-inline"><?php echo $teamError;?></span>
 					      	<?php endif; ?>
 					    </div>
 					  </div>
 					  <div class="form-actions">
-						  <button type="submit" class="btn btn-success">Create</button>
+						  <button type="submit" class="btn btn-success">Save</button>
 						  <a class="btn" href="index.php">Back</a>
 						</div>
 					</form>
 				</div>
 				
-    </div> <!-- /container -->
+    </div> 
+<!-- /container -->
+
+<table id="example" class="table table-striped table-bordered">
+		              <thead>
+		                <tr>
+		                	<th>Game</th>
+		                  <th>Team 1</th>
+		                  <th>Score</th>
+		                  <th> Team 2</th>
+		                  <th>Score</th>
+		                </tr>
+		              </thead>
+		              <tbody> 
+
+		              <?php 
+					   $pdo = Database::connect();
+					   $sql = 'SELECT * FROM games ORDER BY gameid DESC';
+	 				   foreach ($pdo->query($sql) as $row) {
+						   		echo '<tr>';
+						   		echo '<td>'. $row['gameid'] . '</td>';
+							   	echo '<td>'. $row['team1'] . '</td>';
+							   	echo '<td>'. $row['score1'] . '</td>';
+							   	echo '<td>'. $row['team2'] . '</td>';
+							   	echo '<td>'. $row['score2'] . '</td>';
+							   //	echo '<td width=250>';
+							   	//echo '<a class="btn" href="read.php?team='.$row['team'].'">Read</a>';
+							   	//echo '&nbsp;';
+							   	//echo '<a class="btn btn-success" href="update.php?team='.$row['team'].'">Update</a>';
+							   	//echo '&nbsp;';
+							   	///echo '<a class="btn btn-danger" href="delete.php?team='.$row['team'].'">Delete</a>';
+							   	//echo '</td>';
+							   	//echo '</tr>';
+					   }
+					   Database::disconnect();
+					  ?>
+				      </tbody>
+	            </table>
+					<?php
+
+						$order = 'team';
+
+						$orderBy = array('team', 'conference', 'division');
+
+						
+						if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+						    $order = $_GET['orderBy'];
+						}
+
+						$query = 'SELECT * FROM teams ORDER BY $order DESC';
+
+
+
+
+// retrieve and show the data :)
+?>
   </body>
 </html>
