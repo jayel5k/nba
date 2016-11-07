@@ -56,8 +56,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link   href="css/bootstrap.min.css" rel="stylesheet">
-    <link   href="css/style.css" rel="stylesheet">
+     <link   href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
  //<![CDATA[ 
@@ -103,73 +102,65 @@
 </head>
 
 <body>
+
+<div class="container">
+  <h1>Hello World!</h1>
+  <div class="row">
+    <div class="col-sm-6" style="background-color:yellow;">
+      <p>Lorem ipsum...</p>
+    </div>
+    <div class="col-sm-6" style="background-color:pink;">
+      <p>Sed ut perspiciatis...</p>
+    </div>
+  </div>
+</div>
+
     <div class="container">
     
-    			<div class="span10 offset1">
-    				<div class="row">
+		
 		    			<h3>Add game results</h3>
-		    		</div>
-    		
-	    			<form class="form-horizontal1" action="add.php" method="post">
-					  
-					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
-					    <label class="control-label">Team</label>
-					    <div class="controls">
-					      	  <select name="team1" id="team1" onchange="ChangeDivisions(this);">
-					      	  <option value="empty">Select a Team</option>
-  								<option value="Cleveland Cavaliers">Cleveland Cavaliers</option>
-  								<option value="Golden State Warriors">Golden State Warriors</option>
-								</select>
-					      	 <value="<?php echo !empty($conference)?$conference:'';?>">
-					      	<?php if (!empty($conferenceError)): ?>
-					      		<span class="help-inline"><?php echo $conferenceError;?></span>
-					      	<?php endif;?>
-					    </div>
-					  </div>
-					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
-					    <label class="control-label">Score</label>
-					    <div class="controls">
-					      	<input name="score1" type="text"  placeholder="Score" value="<?php echo !empty($team)?$team:'';?>">
-					      	<?php if (!empty($teamError)): ?>
-					      		<span class="help-inline"><?php echo $teamError;?></span>
-					      	<?php endif; ?>
-					    </div>
-					  </div>
-					 <!-- <div class="form-actions">
-						  <button type="submit" class="btn btn-success">Save</button>
-						  <a class="btn" href="index.php">Back</a>
-						</div>
+		    	
+
+					<form class="form-horizontal" action="add.php" method="post">
+					<div class="row">
+					<div class="col-sm-6">
+
+				<label class="control-label">Team</label>
+					 	<select name="team1" id="team1" onchange="ChangeDivisions(this);">
+						<option value="empty">Select a Team</option>
+				  		<option value="Cleveland Cavaliers">Cleveland Cavaliers</option>
+				  		<option value="Golden State Warriors">Golden State Warriors</option>
+				  		<option value="New York Knicks">New York Knicks</option>
+				  		<option value="San Antonio Spurs">San Antonio Spurs</option>
+						</select>
+						
+					<label class="control-label">Score</label>
+	
+						<input name="score1" type="text"  placeholder="Score" value="">
+
+					</div>
+		
+			<div class="col-sm-6">
+	<label class="control-label">Team</label>
+	
+					 <select name="team2" id="game2" onchange="ChangeDivisions(this);">
+					 <option value="empty">Select a Team</option>
+						<option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
+				  		<option value="Utah Jazz">Utah Jazz</option>
+						</select>
+
+								
+		<label class="control-label">Score</label>
+
+					<input name="score2" type="text"  placeholder="Score">
+					</div>
+
+
+					<button type="submit" class="btn btn-success">Save</button>
+					<a class="btn" href="index.php">Back</a>
+	</div>
 					</form>
-					<form class="form-horizontal2" action="add.php" method="post">-->
-					 
-					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
-					    <label class="control-label">Team</label>
-					    <div class="controls">
-					      	  <select name="team2" id="game2" onchange="ChangeDivisions(this);">
-					      	  <option value="empty">Select a Team</option>
-  								<option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
-								</select>
-					      	 <value="<?php echo !empty($conference)?$conference:'';?>">
-					      	<?php if (!empty($conferenceError)): ?>
-					      		<span class="help-inline"><?php echo $conferenceError;?></span>
-					      	<?php endif;?>
-					    </div>
-					  </div>
-					  <div class="control-group <?php echo !empty($teamError)?'error':'';?>">
-					    <label class="control-label">Score</label>
-					    <div class="controls">
-					      	<input name="score2" type="text"  placeholder="Name" value="<?php echo !empty($team)?$team:'';?>">
-					      	<?php if (!empty($teamError)): ?>
-					      		<span class="help-inline"><?php echo $teamError;?></span>
-					      	<?php endif; ?>
-					    </div>
-					  </div>
-					  <div class="form-actions">
-						  <button type="submit" class="btn btn-success">Save</button>
-						  <a class="btn" href="index.php">Back</a>
-						</div>
-					</form>
-				</div>
+	
 				
     </div> 
 <!-- /container -->
@@ -208,24 +199,7 @@
 					   Database::disconnect();
 					  ?>
 				      </tbody>
-	            </table>
-					<?php
-
-						$order = 'team';
-
-						$orderBy = array('team', 'conference', 'division');
-
-						
-						if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
-						    $order = $_GET['orderBy'];
-						}
-
-						$query = 'SELECT * FROM teams ORDER BY $order DESC';
-
-
-
-
-// retrieve and show the data :)
-?>
+</table>
+					
   </body>
 </html>

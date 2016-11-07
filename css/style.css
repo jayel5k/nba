@@ -1,8 +1,4 @@
-.form-horizontal1{
-	float:right;
 
-}
-.form-horizontal2{
-	float:left;
-	
-}
+
+.col1 {display:block;float:left;line-height:30px;width:301px;height:30px;background-color:#f00;border:0;}
+.col2 {position:relative;top:-30px;display:block;float:right;line-height:30px;width:299px;height:30px;background-color:#ff0;border:0;}
