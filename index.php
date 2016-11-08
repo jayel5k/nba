@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link   href="css/bootstrap.min.css" rel="stylesheet">
+    <link   href="css/style.css" rel="stylesheet">
    <script type="text/javascript" src="js/gs_sortable.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -63,25 +64,7 @@ tsRegister();
 					   Database::disconnect();
 					  ?>
 				      </tbody>
-	            </table>
-					<?php
 
-						$order = 'team';
-
-						$orderBy = array('team', 'conference', 'division');
-
-						
-						if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
-						    $order = $_GET['orderBy'];
-						}
-
-						$query = 'SELECT * FROM teams ORDER BY $order DESC';
-
-
-
-
-// retrieve and show the data :)
-?>
 				
 	          
 	            <p>

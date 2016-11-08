@@ -57,6 +57,8 @@
 <head>
     <meta charset="utf-8">
      <link   href="css/bootstrap.min.css" rel="stylesheet">
+     <link   href="css/bootstrap.css" rel="stylesheet">
+     <link   href="css/style.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
  //<![CDATA[ 
@@ -103,17 +105,6 @@
 
 <body>
 
-<div class="container">
-  <h1>Hello World!</h1>
-  <div class="row">
-    <div class="col-sm-6" style="background-color:yellow;">
-      <p>Lorem ipsum...</p>
-    </div>
-    <div class="col-sm-6" style="background-color:pink;">
-      <p>Sed ut perspiciatis...</p>
-    </div>
-  </div>
-</div>
 
     <div class="container">
     
@@ -128,10 +119,36 @@
 				<label class="control-label">Team</label>
 					 	<select name="team1" id="team1" onchange="ChangeDivisions(this);">
 						<option value="empty">Select a Team</option>
+				  		<option value="Atlanta Hawks">Atlanta Hawks</option>
+				  		<option value="Boston Celtics">Boston Celtics</option>
+				  		<option value="Brooklyn Nets">Brooklyn Nets</option>
+				  		<option value="Charlotte Hornets">Charlotte Hornets</option>
+				  		<option value="Chicago Bulls">Chicago Bulls	</option>
 				  		<option value="Cleveland Cavaliers">Cleveland Cavaliers</option>
+				  		<option value="Dallas Mavericks">Dallas Mavericks</option>
+				  		<option value="Denver Nuggets">Denver Nuggets</option>
+				  		<option value="Detroit Pistons">Detroit Pistons</option>
 				  		<option value="Golden State Warriors">Golden State Warriors</option>
+				  		<option value="Houston Rockets">Houston Rockets	</option>
+				  		<option value="Indiana Pacers">Indiana Pacers</option>
+				  		<option value="Los Angeles Clippers">Los Angeles Clippers	</option>
+				  		<option value="Los Angeles Lakers">Los Angeles Lakers</option>
+				  		<option value="Memphis Grizzlies">Memphis Grizzlies	</option>
+				  		<option value="Miami Heat">Miami Heat	</option>
+				  		<option value="Milwaukee Bucks">Milwaukee Bucks</option>
+				  		<option value="Minnesota Timberwolves">Minnesota Timberwolves</option>
+				  		<option value="New Orleans Pelicans">New Orleans Pelicans	</option>
 				  		<option value="New York Knicks">New York Knicks</option>
+				  		<option value="Oklahoma City Thunder">Oklahoma City Thunder	</option>
+				  		<option value="Orlando Magic">Orlando Magic</option>
+				  		<option value="Philadelphia 76ers">Philadelphia 76ers</option>
+				  		<option value="Phoenix Suns">Phoenix Suns</option>
+				  		<option value="Portland Trail Blazers">Portland Trail Blazers	</option>
+				  		<option value="Sacramento Kings">Sacramento Kings</option>
 				  		<option value="San Antonio Spurs">San Antonio Spurs</option>
+				  		<option value="Toronto Raptors">Toronto Raptors	</option>
+				  		<option value="Utah Jazz">Utah Jazz	</option>
+				  		<option value="Washington Wizards">Washington Wizards</option>
 						</select>
 						
 					<label class="control-label">Score</label>
@@ -146,7 +163,6 @@
 					 <select name="team2" id="game2" onchange="ChangeDivisions(this);">
 					 <option value="empty">Select a Team</option>
 						<option value="Oklahoma City Thunder">Oklahoma City Thunder</option>
-				  		<option value="Utah Jazz">Utah Jazz</option>
 						</select>
 
 								
@@ -155,10 +171,13 @@
 					<input name="score2" type="text"  placeholder="Score">
 					</div>
 
-
-					<button type="submit" class="btn btn-success">Save</button>
+					<div style="text-align:center;">
+					<button type="submit" class="con btn-primary btn-lg active">Save</button>
 					<a class="btn" href="index.php">Back</a>
-	</div>
+					</div>
+
+					
+
 					</form>
 	
 				

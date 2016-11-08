@@ -31,7 +31,7 @@
     
     			<div class="span10 offset1">
     				<div class="row">
-		    			<h3>Read a Customer</h3>
+		    			<h3>View Team</h3>
 		    		</div>
 		    		
 	    			<div class="form-horizontal" >
@@ -44,7 +44,7 @@
 					    </div>
 					  </div>
 					  <div class="control-group">
-					    <label class="control-label">Email Address</label>
+					    <label class="control-label">Conference</label>
 					    <div class="controls">
 					      	<label class="checkbox">
 						     	<?php echo $data['conference'];?>
@@ -52,7 +52,7 @@
 					    </div>
 					  </div>
 					  <div class="control-group">
-					    <label class="control-label">Mobile Number</label>
+					    <label class="control-label">Division</label>
 					    <div class="controls">
 					      	<label class="checkbox">
 						     	<?php echo $data['division'];?>
