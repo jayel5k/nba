@@ -172,7 +172,7 @@
 					</div>
 
 					<div style="text-align:center;">
-					<button type="submit" class="con btn-primary btn-lg active">Save</button>
+					<button type="submit" class="btn-primary btn-lg active">Save</button>
 					<a class="btn" href="index.php">Back</a>
 					</div>
 

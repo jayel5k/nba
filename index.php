@@ -22,16 +22,9 @@ tsRegister();
     		</div>
 			<div class="row">
 
-<!-- <form>
-    <label>Sort By:</label>
-        <select name="sort" id="sort" style="float: left;">
-            <option value="team">By Team</option>
-            <option value="conference">Conference</option>
-            <option value="division">Division</option>
-        </select>
-    </form>-->
 
-				
+
+
 				
 				<table id="example" class="table table-striped table-bordered">
 		              <thead>
@@ -61,15 +54,17 @@ tsRegister();
 							   	echo '<a class="btn btn-danger" href="delete.php?team='.$row['team'].'">Delete</a>';
 							   	echo '</td>';
 							   	echo '</tr>';
-
-						
-
 					   }
+					   $sql = $pdo->prepare('SELECT * FROM teams');
+					   $sql->execute();
+					  $count=$sql->rowCount();
+					  print("No. of teams $count ")
+
 
 
 				
 
-					   Database::disconnect();
+					  // Database::disconnect();
 					 
 					  ?>
 				      </tbody>
@@ -77,7 +72,7 @@ tsRegister();
 
 
 <?php
-//$mysqli = new mysqli("localhost","root", "", "nba");
+//$mysqli = new mysqli("localhost","root", "system", "nba");
 //$query = $mysqli->prepare("SELECT * FROM teams");
 //$query->execute();
 //$query->store_result();

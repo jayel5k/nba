@@ -4,7 +4,7 @@ class Database
 	private static $dbName = 'nba' ; 
 	private static $dbHost = 'localhost' ;
 	private static $dbUsername = 'root';
-	private static $dbUserPassword = '';
+	private static $dbUserPassword = 'system';
 	
 	private static $cont  = null;
 	
