@@ -30,6 +30,7 @@ tsRegister();
             <option value="division">Division</option>
         </select>
     </form>-->
+
 				
 				
 				<table id="example" class="table table-striped table-bordered">
@@ -60,12 +61,37 @@ tsRegister();
 							   	echo '<a class="btn btn-danger" href="delete.php?team='.$row['team'].'">Delete</a>';
 							   	echo '</td>';
 							   	echo '</tr>';
+
+						
+
 					   }
-					   Database::disconnect();
-					  ?>
-				      </tbody>
+
 
 				
+
+					   Database::disconnect();
+					 
+					  ?>
+				      </tbody>
+				      </table>
+
+
+<?php
+//$mysqli = new mysqli("localhost","root", "", "nba");
+//$query = $mysqli->prepare("SELECT * FROM teams");
+//$query->execute();
+//$query->store_result();
+
+//$rows = $query->num_rows;
+
+//echo  "Teams:".$rows;
+
+?>
+
+
+		
+
+
 	          
 	            <p>
 					<a href="create.php" class="btn btn-success">Create</a>

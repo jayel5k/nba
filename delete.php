@@ -35,7 +35,7 @@
     
     			<div class="span10 offset1">
     				<div class="row">
-		    			<h3>Delete a Customer</h3>
+		    			<h3>Delete a Team</h3>
 		    		</div>
 		    		
 	    			<form class="form-horizontal" action="delete.php" method="post">
