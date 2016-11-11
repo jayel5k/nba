@@ -4,73 +4,88 @@
 
 	if ( !empty($_POST)) {
 		// keep track validation errors
-
+		$team1Error = null;
+		$score1Error = null;
+		$team2Error = null;
+		$score2Error = null;
 		
 		// keep track post values
 		$team1 = $_POST['team1'];
 		$score1 = $_POST['score1'];
 		$team2 = $_POST['team2'];
 		$score2 = $_POST['score2'];
-	
+		//$result = $_POST['result'];
 		
 		
 		// validate input
 		$valid = true;
+		if (empty($team1)) {
+			$team1Error = 'Please enter game';
+			$valid = false;
+		}
 		
 		if (empty($score1)) {
 			$score1Error = 'Please enter score';
 			$valid = false;
 		} 
+		if (empty($team2)) {
+			$team2Error = 'Please enter game';
+			$valid = false;
+		}
 		
 		if (empty($score2)) {
 			$score2Error = 'Please enter score';
 			$valid = false;
 		} 
-
-
-
-
 		
 		
 		// insert data
-		if ($valid) {
+		//if ($valid) {
+		//	$pdo = Database::connect();
+		//	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		//	$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
+
+//				if($score1>$score2){
+//					$sql = "INSERT games SET result='W'";
+//				}
+
+//				else
+//				{
+//					$sql = "INSERT games SET result='L'";
+//				}
+//			$q = $pdo->prepare($sql);
+//			$q->execute(array($team1,$score1,$team2,$score2));
+//			Database::disconnect();
+//			header("Location: add.php");
+//			}
+
+
+			if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)" ;
+			//$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
+
+				if($score1>$score2){
+					//$sql = "INSERT games SET result='W'";
+					//$sql = "INSERT games SET result='L'";
+					$sql = "INSERT INTO games (gameid,team1,score1,team2,score2,result) values(null,?,?,?,?,'L')";
+					}
+
+				else
+				{
+					
+					$sql = "INSERT INTO games (gameid,team1,score1,team2,score2,result) values(null,?,?,?,?,'W')";
+				}
+
 			$q = $pdo->prepare($sql);
 			$q->execute(array($team1,$score1,$team2,$score2));
 			Database::disconnect();
 			header("Location: add.php");
-		}
-
-
-		if($score1>$score2){
-			$pdo = Database::connect();
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO games (result) values('W')" ;
-			$q = $pdo->prepare($sql);
-			Database::disconnect();
-			header("Location: add.php");
-		}
-		else{
-
-			$pdo = Database::connect();
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO games (result) values('L')" ;
-			$q = $pdo->prepare($sql);
-			Database::disconnect();
-			header("Location: add.php");
-
-		}
-		
-
+			}
 
 
 	}
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -131,7 +146,15 @@
     
 		
 		    			<h3>Add game results</h3>
-		    	
+		    	<?php
+		    		$pdo = Database::connect();
+					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		    		$sql = $pdo->prepare('SELECT * FROM games');
+					$sql->execute();
+					$count=$sql->rowCount();
+					print("No. of games $count ")
+
+		    	?>
 
 					<form class="form-horizontal" action="add.php" method="post">
 					<div class="row">
@@ -212,8 +235,7 @@
 		                  <th>Score</th>
 		                  <th> Team 2</th>
 		                  <th>Score</th>
-		                  <th>Result</th>
-
+		                  <th>Results</th>
 		                </tr>
 		              </thead>
 		              <tbody> 
@@ -229,9 +251,6 @@
 							   	echo '<td>'. $row['team2'] . '</td>';
 							   	echo '<td>'. $row['score2'] . '</td>';
 							   	echo '<td>'. $row['result'] . '</td>';
-							   
-
-							  
 							   //	echo '<td width=250>';
 							   	//echo '<a class="btn" href="read.php?team='.$row['team'].'">Read</a>';
 							   	//echo '&nbsp;';
