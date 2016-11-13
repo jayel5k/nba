@@ -1,7 +1,6 @@
 <?php 
 	
 	require 'database.php';
-
 	if ( !empty($_POST)) {
 		// keep track validation errors
 		$team1Error = null;
@@ -14,6 +13,7 @@
 		$score1 = $_POST['score1'];
 		$team2 = $_POST['team2'];
 		$score2 = $_POST['score2'];
+		//$result = $_POST['result'];
 		
 		
 		// validate input
@@ -39,15 +39,41 @@
 		
 		
 		// insert data
-		if ($valid) {
+		//if ($valid) {
+		//	$pdo = Database::connect();
+		//	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		//	$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
+//				if($score1>$score2){
+//					$sql = "INSERT games SET result='W'";
+//				}
+//				else
+//				{
+//					$sql = "INSERT games SET result='L'";
+//				}
+//			$q = $pdo->prepare($sql);
+//			$q->execute(array($team1,$score1,$team2,$score2));
+//			Database::disconnect();
+//			header("Location: add.php");
+//			}
+			if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
+			//$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
+				if($score1>$score2){
+					//$sql = "INSERT games SET result='W'";
+					//$sql = "INSERT games SET result='L'";
+					$sql = "INSERT INTO games (gameid,team1,score1,team2,score2,result) values(null,?,?,?,?,'L')";
+					}
+				else
+				{
+					
+					$sql = "INSERT INTO games (gameid,team1,score1,team2,score2,result) values(null,?,?,?,?,'W')";
+				}
 			$q = $pdo->prepare($sql);
 			$q->execute(array($team1,$score1,$team2,$score2));
 			Database::disconnect();
 			header("Location: add.php");
-		}
+			}
 	}
 ?>
 
@@ -110,7 +136,14 @@
     
 		
 		    			<h3>Add game results</h3>
-		    	
+		    	<?php
+		    		$pdo = Database::connect();
+					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		    		$sql = $pdo->prepare('SELECT * FROM games');
+					$sql->execute();
+					$count=$sql->rowCount();
+					print("No. of games $count ")
+		    	?>
 
 					<form class="form-horizontal" action="add.php" method="post">
 					<div class="row">
@@ -139,7 +172,6 @@
 				  		<option value="Minnesota Timberwolves">Minnesota Timberwolves</option>
 				  		<option value="New Orleans Pelicans">New Orleans Pelicans	</option>
 				  		<option value="New York Knicks">New York Knicks</option>
-				  		<option value="Oklahoma City Thunder">Oklahoma City Thunder	</option>
 				  		<option value="Orlando Magic">Orlando Magic</option>
 				  		<option value="Philadelphia 76ers">Philadelphia 76ers</option>
 				  		<option value="Phoenix Suns">Phoenix Suns</option>
@@ -192,6 +224,7 @@
 		                  <th>Score</th>
 		                  <th> Team 2</th>
 		                  <th>Score</th>
+		                  <th>Results</th>
 		                </tr>
 		              </thead>
 		              <tbody> 
@@ -206,6 +239,7 @@
 							   	echo '<td>'. $row['score1'] . '</td>';
 							   	echo '<td>'. $row['team2'] . '</td>';
 							   	echo '<td>'. $row['score2'] . '</td>';
+							   	echo '<td>'. $row['result'] . '</td>';
 							   //	echo '<td width=250>';
 							   	//echo '<a class="btn" href="read.php?team='.$row['team'].'">Read</a>';
 							   	//echo '&nbsp;';
