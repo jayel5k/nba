@@ -40,7 +40,7 @@ tsRegister();
 		              <?php 
 					   include 'database.php';
 					   $pdo = Database::connect();
-					   $sql = 'SELECT * FROM teams ORDER BY team DESC';
+					   $sql = 'SELECT * FROM teams ORDER BY team ASC';
 	 				   foreach ($pdo->query($sql) as $row) {
 						   		echo '<tr>';
 							   	echo '<td>'. $row['team'] . '</td>';
