@@ -32,7 +32,7 @@ tsRegister();
 		                  <th>Team</th>
 		                  <th>Conference</th>
 		                  <th> Division</th>
-		     
+		                  <th>Action</th>
 		                </tr>
 		              </thead>
 		              <tbody> 
@@ -46,6 +46,12 @@ tsRegister();
 							   	echo '<td>'. $row['team'] . '</td>';
 							   	echo '<td>'. $row['conference'] . '</td>';
 							   	echo '<td>'. $row['division'] . '</td>';
+							   	echo '<td width=250>';
+							   	echo '<a class="btn" href="read.php?team='.$row['team'].'">Read</a>';
+							   	echo '&nbsp;';
+							   	echo '<a class="btn btn-success" href="update.php?team='.$row['team'].'">Update</a>';
+							   	echo '&nbsp;';
+							   	echo '<a class="btn btn-danger" href="delete.php?team='.$row['team'].'">Delete</a>';
 							   	echo '</td>';
 							   	echo '</tr>';
 					   }

@@ -43,17 +43,17 @@
 		//	$pdo = Database::connect();
 		//	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		//	$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
-<<<<<<< HEAD
-//				if($score1>$score2){
-//					$sql = "INSERT games SET result='W'";
-//				}
-=======
 
 //				if($score1>$score2){
 //					$sql = "INSERT games SET result='W'";
 //				}
 
->>>>>>> ae47461ab26bfb43138d574e26819db7d71f813b
+
+//				if($score1>$score2){
+//					$sql = "INSERT games SET result='W'";
+//				}
+
+
 //				else
 //				{
 //					$sql = "INSERT games SET result='L'";
@@ -63,47 +63,38 @@
 //			Database::disconnect();
 //			header("Location: add.php");
 //			}
-<<<<<<< HEAD
-=======
 
 
->>>>>>> ae47461ab26bfb43138d574e26819db7d71f813b
 			if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//$sql = "INSERT INTO games (gameid,team1,score1,team2,score2) values(null,?,?,?,?)";
-<<<<<<< HEAD
-=======
 
->>>>>>> ae47461ab26bfb43138d574e26819db7d71f813b
+
 				if($score1>$score2){
 					//$sql = "INSERT games SET result='W'";
 					//$sql = "INSERT games SET result='L'";
 					$sql = "INSERT INTO games (gameid,team1,score1,team2,score2,result) values(null,?,?,?,?,'L')";
 					}
-<<<<<<< HEAD
-=======
 
->>>>>>> ae47461ab26bfb43138d574e26819db7d71f813b
+
 				else
 				{
 					
 					$sql = "INSERT INTO games (gameid,team1,score1,team2,score2,result) values(null,?,?,?,?,'W')";
 				}
-<<<<<<< HEAD
-=======
 
->>>>>>> ae47461ab26bfb43138d574e26819db7d71f813b
+
 			$q = $pdo->prepare($sql);
 			$q->execute(array($team1,$score1,$team2,$score2));
 			Database::disconnect();
 			header("Location: add.php");
 			}
-<<<<<<< HEAD
-=======
 
 
->>>>>>> ae47461ab26bfb43138d574e26819db7d71f813b
+
+
+
 	}
 ?>
 
@@ -173,10 +164,7 @@
 					$sql->execute();
 					$count=$sql->rowCount();
 					print("No. of games $count ")
-<<<<<<< HEAD
-=======
 
->>>>>>> ae47461ab26bfb43138d574e26819db7d71f813b
 		    	?>
 
 					<form class="form-horizontal" action="add.php" method="post">
