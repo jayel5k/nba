@@ -13,6 +13,24 @@ tsRegister();
 // -->
 </script>
 
+<script type="text/javascript">
+	
+$('#modal_detail').on('show', function(){
+  var id_beli = $(this).attr('id');
+  $('#modalContent').html('Loading..')
+
+  $.ajax({
+      cache: false,
+      type: 'GET',
+      url: 'nba/read.php',
+      data: 'detail=' + id_beli,
+      success: function(data) {
+        $('#modalContent').html(data); //this part to pass the var
+      }
+  });
+})
+</script>
+
 </head>
 
 <body>
@@ -47,7 +65,9 @@ tsRegister();
 							   	echo '<td>'. $row['conference'] . '</td>';
 							   	echo '<td>'. $row['division'] . '</td>';
 							   	echo '<td width=250>';
-							   	echo '<a class="btn" href="read.php?team='.$row['team'].'">Read</a>';
+							  	echo '<a class="btn" href="read.php?team='.$row['team'].'">Read</a>';
+							  //  	echo '<a class="btn" href="#modal_detail">Read</a>';
+							   
 							   	echo '&nbsp;';
 							   	echo '<a class="btn btn-success" href="update.php?team='.$row['team'].'">Update</a>';
 							   	echo '&nbsp;';
@@ -62,6 +82,8 @@ tsRegister();
 
 
 
+
+
 				
 
 					  // Database::disconnect();
@@ -69,6 +91,22 @@ tsRegister();
 					  ?>
 				      </tbody>
 				      </table>
+
+
+<div id="modal_detail" class="modal hide fade">
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">&times;</button>
+      <h3>Detail Product</h3>
+    </div>
+    <div class="modal-body">            
+        <div id="modalContent" style="display:none;">
+        Here i want to display data from query about the detail of a product (name, price etc)      
+        </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn btn-info" data-dismiss="modal" >Close</a>
+    </div>
+</div>
 
 
 <?php
@@ -79,7 +117,7 @@ tsRegister();
 
 //$rows = $query->num_rows;
 
-//echo  "Teams:".$rows;
+
 
 ?>
 

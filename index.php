@@ -32,6 +32,7 @@ tsRegister();
 		                  <th>Team</th>
 		                  <th>Conference</th>
 		                  <th> Division</th>
+		                  <th> </th>
 		     
 		                </tr>
 		              </thead>
@@ -46,6 +47,9 @@ tsRegister();
 							   	echo '<td>'. $row['team'] . '</td>';
 							   	echo '<td>'. $row['conference'] . '</td>';
 							   	echo '<td>'. $row['division'] . '</td>';
+							   	echo '<td>
+						<button data-toggle="modal" data-target="#view-modal" data-id="<?php echo '.$row['team'].' ;?>" id="geTeam" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-eye-open"></i> View</button>
+						</td>';
 							   	echo '</td>';
 							   	echo '</tr>';
 					   }
@@ -63,29 +67,78 @@ tsRegister();
 					  ?>
 				      </tbody>
 				      </table>
-
-
-<?php
-//$mysqli = new mysqli("localhost","root", "system", "nba");
-//$query = $mysqli->prepare("SELECT * FROM teams");
-//$query->execute();
-//$query->store_result();
-
-//$rows = $query->num_rows;
-
-//echo  "Teams:".$rows;
-
-?>
-
-
-		
-
-
 	          
 	            <p>
 					<a href="create.php" class="btn btn-success">Create</a>
 				</p>
     	</div>
     </div> <!-- /container -->
+
+    <div id="view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+             <div class="modal-dialog"> 
+                  <div class="modal-content"> 
+                  
+                       <div class="modal-header"> 
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> 
+                            <h4 class="modal-title">
+                            	<i class="glyphicon glyphicon-user"></i> Team
+                            </h4> 
+                       </div> 
+                       <div class="modal-body"> 
+                       
+                       	   <div id="modal-loader" style="display: none; text-align: center;">
+                       	   	<img src="ajax-loader.gif">
+                       	   </div>
+                            
+                           <!-- content will be load here -->                          
+                           <div id="dynamic-content"></div>
+                             
+                        </div> 
+                        <div class="modal-footer"> 
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                        </div> 
+                        
+                 </div> 
+              </div>
+       </div><!-- /.modal -->  
+
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
+       <script>
+$(document).ready(function(){
+	
+	$(document).on('click', '#geTeam', function(e){
+		
+		e.preventDefault();
+		
+		var uid = $(this).data('id');   // it will get id of clicked row
+		
+		$('#dynamic-content').html(''); // leave it blank before ajax call
+		$('#modal-loader').show();      // load ajax loader
+		
+		$.ajax({
+			url: 'geTeam.php',
+			type: 'POST',
+			data: 'id='+uid,
+			dataType: 'html'
+		})
+		.done(function(data){
+			console.log(data);	
+			$('#dynamic-content').html('');    
+			$('#dynamic-content').html(data); // load response 
+			$('#modal-loader').hide();		  // hide ajax loader	
+		})
+		.fail(function(){
+			$('#dynamic-content').html('<i class="glyphicon glyphicon-info-sign"></i> Something went wrong, Please try again...');
+			$('#modal-loader').hide();
+		});
+		
+	});
+	
+});
+
+</script>  
   </body>
 </html>

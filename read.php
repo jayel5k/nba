@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="modal_detail">
     
     			<div class="span10 offset1">
     				<div class="row">

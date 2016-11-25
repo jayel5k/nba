@@ -240,6 +240,24 @@
 
 <table id="example" class="table table-striped table-bordered">
 		              <thead>
+		              <tr><?php
+		    		$pdo = Database::connect();
+					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		    		$sql = $pdo->prepare('SELECT * FROM games WHERE result="W"');
+					$sql->execute();
+					$win=$sql->rowCount();
+					print("Win/Loss: $win  -")
+
+		    	?></tr>
+		    	  <tr><?php
+		    		$pdo = Database::connect();
+					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		    		$sql = $pdo->prepare('SELECT * FROM games WHERE result="L"');
+					$sql->execute();
+					$loss=$sql->rowCount();
+					print("$loss ")
+
+		    	?></tr>
 		                <tr>
 		                	<th>Game</th>
 		                  <th>Team 1</th>
@@ -247,6 +265,7 @@
 		                  <th> Team 2</th>
 		                  <th>Score</th>
 		                  <th>Results</th>
+		                  <th>	</th>
 		                </tr>
 		              </thead>
 		              <tbody> 
@@ -275,6 +294,10 @@
 					  ?>
 				      </tbody>
 </table>
+			
+
+
+
 					
   </body>
 </html>
